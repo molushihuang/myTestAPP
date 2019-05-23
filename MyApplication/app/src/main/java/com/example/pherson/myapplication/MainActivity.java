@@ -2,9 +2,6 @@ package com.example.pherson.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
@@ -60,12 +57,14 @@ public class MainActivity extends AppCompatActivity {
 //        ActivityOptionsCompat compat = ActivityOptionsCompat.makeScaleUpAnimation(ivDoufu,
 //                        ivDoufu.getWidth() / 2, ivDoufu.getHeight() / 2, 0, 0);
 
-        Pair<View, String> imagePair = Pair.create(ivDoufu, getString(R.string.transition_name));
-        Pair<View, String> textPair = Pair.create(tvHello, getString(R.string.transition_name2));
+//        Pair<View, String> imagePair = Pair.create(ivDoufu, getString(R.string.transition_name));
+//        Pair<View, String> textPair = Pair.create(tvHello, getString(R.string.transition_name2));
+//
+//        ActivityOptionsCompat compat = ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this, imagePair,textPair);
+//
+//        ActivityCompat.startActivity(MainActivity.this, new Intent(MainActivity.this, SecondActivity.class), compat.toBundle());
 
-        ActivityOptionsCompat compat = ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this, imagePair,textPair);
-
-        ActivityCompat.startActivity(MainActivity.this, new Intent(MainActivity.this, SecondActivity.class), compat.toBundle());
+        startActivity(new Intent(this,ContraintActivity.class));
     }
 
 
