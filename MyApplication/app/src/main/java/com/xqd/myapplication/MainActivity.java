@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        tvHello.setText(new Java2CJNI().getName());
+        tvHello.setText(new Java2CJNI().getName()+new Java2CJNI().getPassword());
 
 //        AnimatorSet objectAnimator = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.object_animator);
 //        objectAnimator.setTarget(tvHello);

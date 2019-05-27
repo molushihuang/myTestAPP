@@ -11,10 +11,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
-        ndk{
-            moduleName "Java2C" //so文件名
-            abiFilters "arm64-v8a", "armeabi-v7a", "x86" //CPU类型
-        }
+
     }
     buildTypes {
         release {
@@ -22,16 +19,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
-        externalNativeBuild {
-            ndkBuild {
-                path 'src/main/java/com/xqd/myapplication/jni/Android.mk'
-            }
-        }
-        sourceSets.main {
-            jni.srcDirs = []
-            jniLibs.srcDirs = ['src/main/jniLibs']
-        }
 
+
+    }
+    externalNativeBuild {
+        cmake {
+            path file('src/main/cpp/CMakeLists.txt')
+        }
     }
 }
 
