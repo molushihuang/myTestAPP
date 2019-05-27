@@ -1,12 +1,13 @@
-package com.example.pherson.myapplication;
+package com.xqd.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    View tvHello;
+    TextView tvHello;
     View ivDoufu;
 
     @Override
@@ -17,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        tvHello = (View) findViewById(R.id.tv_hello);
+        tvHello = (TextView) findViewById(R.id.tv_hello);
         ivDoufu = (View) findViewById(R.id.iv_doufu);
 
         tvHello.setOnClickListener(new View.OnClickListener() {
@@ -32,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
                 toNext();
             }
         });
+
+        tvHello.setText(new Java2CJNI().getName());
+
 //        AnimatorSet objectAnimator = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.object_animator);
 //        objectAnimator.setTarget(tvHello);
 //        objectAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
@@ -64,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
 //
 //        ActivityCompat.startActivity(MainActivity.this, new Intent(MainActivity.this, SecondActivity.class), compat.toBundle());
 
-        startActivity(new Intent(this,ContraintActivity.class));
+        startActivity(new Intent(this, ContraintActivity.class));
     }
 
 

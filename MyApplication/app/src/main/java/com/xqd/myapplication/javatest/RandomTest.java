@@ -1,4 +1,4 @@
-package com.example.pherson.myapplication.javatest;
+package com.xqd.myapplication.javatest;
 
 import java.util.Random;
 

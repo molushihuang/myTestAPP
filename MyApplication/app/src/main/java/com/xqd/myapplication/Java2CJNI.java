@@ -1,4 +1,4 @@
-package com.example.pherson.myapplication;
+package com.xqd.myapplication;
 
 
 public class Java2CJNI {
@@ -7,6 +7,7 @@ public class Java2CJNI {
     }
 
     public native String java2c();
-	
-	
+
+    public native String getPassword();
+    public native String getName();
 }

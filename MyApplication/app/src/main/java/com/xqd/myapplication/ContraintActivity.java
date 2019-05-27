@@ -1,4 +1,4 @@
-package com.example.pherson.myapplication;
+package com.xqd.myapplication;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

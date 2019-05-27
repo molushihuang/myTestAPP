@@ -1,4 +1,4 @@
-package com.example.pherson.myapplication.javatest;
+package com.xqd.myapplication.javatest;
 
 /**
  * Created by 谢邱东 on 2018/12/27 10:29.

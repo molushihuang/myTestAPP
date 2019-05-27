@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     buildToolsVersion "28.0.3"
     defaultConfig {
-        applicationId "com.example.pherson.myapplication"
+        applicationId "com.xqd.myapplication"
         minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
@@ -13,7 +13,7 @@ android {
 
         ndk{
             moduleName "Java2C" //so文件名
-            abiFilters "armeabi", "armeabi-v7a", "x86" //CPU类型
+            abiFilters "arm64-v8a", "armeabi-v7a", "x86" //CPU类型
         }
     }
     buildTypes {
@@ -21,6 +21,17 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
+        externalNativeBuild {
+            ndkBuild {
+                path 'src/main/java/com/xqd/myapplication/jni/Android.mk'
+            }
+        }
+        sourceSets.main {
+            jni.srcDirs = []
+            jniLibs.srcDirs = ['src/main/jniLibs']
+        }
+
     }
 }
 
