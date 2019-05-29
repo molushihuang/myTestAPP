@@ -13,12 +13,6 @@ Java_com_xqd_myapplication_JNIUtil_getName(JNIEnv *env, jobject /* this */) {
     return env->NewStringUTF(hello.c_str());
 }
 
-extern "C" JNIEXPORT jstring JNICALL
-Java_com_xqd_myapplication_JNIUtil_getPassword(JNIEnv *env, jobject /* this */) {
-    std::string hello = " C++ 密码";
-    return env->NewStringUTF(hello.c_str());
-}
-
 /**
  * 加法
  */
@@ -50,4 +44,3 @@ extern "C" JNIEXPORT jdouble JNICALL
 Java_com_xqd_myapplication_JNIUtil_divNumber(JNIEnv *env, jobject, jdouble a, jdouble b) {
     return a / b;
 }
-

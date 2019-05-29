@@ -8,7 +8,9 @@
 #include <android/log.h>
 #include <cstdio>
 #include <cstdlib>
+#include <iostream>
 
+using namespace std;
 
 jint addNumber(JNIEnv *env, jclass clazz, jint a, jint b) {
     return a + b;
@@ -26,10 +28,23 @@ jdouble divNumber(JNIEnv *env, jclass clazz, jdouble a, jdouble b) {
     return a / b;
 }
 
+jstring password(JNIEnv *env, jobject, jstring str) {
+    string hello = " C++ 密码";
+    char *s = "sdssds";
+    cout << hello;
+    return env->NewStringUTF(hello.c_str());
+}
+
+/**
+ * 动态注册
+ * @param vm
+ * @param reserved
+ * @return
+ */
 JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved) {
 
     //打印日志，说明已经进来了
-    __android_log_print(ANDROID_LOG_ERROR, "JNITag", "enter jni_onload");
+    __android_log_print(ANDROID_LOG_ERROR, "JNITag", "enter JNI_OnLoad");
 
     JNIEnv *env = NULL;
 
@@ -38,19 +53,20 @@ JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved) {
         return JNI_ERR;
     }
 
-    //注册四个方法，注意签名
+    //注册5个方法，注意签名
     const JNINativeMethod method[] = {
-            {"add", "(II)I", (void *) addNumber},
-            {"sub", "(II)I", (void *) subNumber},
-            {"mul", "(II)I", (void *) mulNumber},
-            {"div", "(DD)D", (void *) divNumber}
+            {"add",         "(II)I",                                  (void *) addNumber},
+            {"sub",         "(II)I",                                  (void *) subNumber},
+            {"mul",         "(II)I",                                  (void *) mulNumber},
+            {"div",         "(DD)D",                                  (void *) divNumber},
+            {"getPassword", "(Ljava/lang/String;)Ljava/lang/String;", (void *) password}
     };
 
     //找到对应的JNITools类
     jclass jClassName = env->FindClass("com/xqd/myapplication/JNIUtil");
 
     //开始注册
-    jint ret = env->RegisterNatives(jClassName, method, 4);
+    jint ret = env->RegisterNatives(jClassName, method, 5);
 
     //如果注册失败，打印日志
     if (ret != JNI_OK) {

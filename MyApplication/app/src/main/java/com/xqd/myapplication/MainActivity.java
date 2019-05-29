@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        tvHello.setText(new JNIUtil().getName()+new JNIUtil().getPassword()+new JNIUtil().add(1200,10));
+        tvHello.setText(new JNIUtil().getName()+new JNIUtil().getPassword("ada")+new JNIUtil().add(1200,10));
 
 //        AnimatorSet objectAnimator = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.object_animator);
 //        objectAnimator.setTarget(tvHello);

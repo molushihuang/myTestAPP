@@ -14,8 +14,6 @@ public class JNIUtil {
      * 静态注册的方法
      */
 
-    public native String getPassword();
-
     public native String getName();
 
     public native int addNumber(int a, int b);
@@ -25,7 +23,6 @@ public class JNIUtil {
     public native int mulNumber(int a, int b);
 
     public native double divNumber(double a, double b);
-
 
     /**
      * 动态注册的方法
@@ -38,4 +35,6 @@ public class JNIUtil {
     public native int mul(int a, int b);
 
     public native double div(double a, double b);
+
+    public native String getPassword(String str);
 }
