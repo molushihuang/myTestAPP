@@ -36,7 +36,7 @@ public class JNIUtil {
 
     public native double div(double a, double b);
 
-    public native String getPassword(String str);
+    public native String getPassword(String userid,String time);
 
-    public native String md5(String str);
+    public native String getMD5(String str);
 }

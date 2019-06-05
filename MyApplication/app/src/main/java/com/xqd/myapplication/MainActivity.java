@@ -35,7 +35,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
 //        tvHello.setText(new JNIUtil().getName()+new JNIUtil().getPassword("ada")+new JNIUtil().add(1200,10));
-        tvHello.setText(new JNIUtil().md5("ada"));
+//        tvHello.setText(EncryptUtil.getPassword("25830148ac174ebfa1db7a044d587ac0","2019-06-04 22:12:05") + "\n"
+//                +new JNIUtil().getPassword("25830148ac174ebfa1db7a044d587ac0","2019-06-04 22:12:05"));
+
+        tvHello.setText(EncryptUtil.enableAdb(MainActivity.this)+" "+EncryptUtil.enableLocation(MainActivity.this));
 
 //        AnimatorSet objectAnimator = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.object_animator);
 //        objectAnimator.setTarget(tvHello);
