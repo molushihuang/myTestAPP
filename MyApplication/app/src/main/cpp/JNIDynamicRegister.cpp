@@ -9,6 +9,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <iostream>
+#include "md5.h"
 
 using namespace std;
 
@@ -35,6 +36,16 @@ jstring password(JNIEnv *env, jobject, jstring str) {
     return env->NewStringUTF(hello.c_str());
 }
 
+jstring getMD5(JNIEnv *env, jobject, jstring str) {
+    char *text = "hello world";
+    CMD5 iMD5;
+    iMD5.GenerateMD5((unsigned char *) text, strlen(text));
+    std::string result = iMD5.ToString();
+    return env->NewStringUTF(result.c_str());
+}
+
+
+
 /**
  * 动态注册
  * @param vm
@@ -59,14 +70,15 @@ JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved) {
             {"sub",         "(II)I",                                  (void *) subNumber},
             {"mul",         "(II)I",                                  (void *) mulNumber},
             {"div",         "(DD)D",                                  (void *) divNumber},
-            {"getPassword", "(Ljava/lang/String;)Ljava/lang/String;", (void *) password}
+            {"getPassword", "(Ljava/lang/String;)Ljava/lang/String;", (void *) password},
+            {"md5", "(Ljava/lang/String;)Ljava/lang/String;", (void *) getMD5}
     };
 
     //找到对应的JNITools类
     jclass jClassName = env->FindClass("com/xqd/myapplication/JNIUtil");
 
     //开始注册
-    jint ret = env->RegisterNatives(jClassName, method, 5);
+    jint ret = env->RegisterNatives(jClassName, method, 6);
 
     //如果注册失败，打印日志
     if (ret != JNI_OK) {
