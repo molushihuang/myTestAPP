@@ -1,7 +1,8 @@
-package com.xqd.myapplication;
+package com.xqd.myapplication.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import com.xqd.myapplication.R;
 
 public class ContraintActivity extends AppCompatActivity {
 

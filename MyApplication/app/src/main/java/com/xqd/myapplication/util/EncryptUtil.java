@@ -1,4 +1,4 @@
-package com.xqd.myapplication;
+package com.xqd.myapplication.util;
 
 import android.content.Context;
 import android.provider.Settings;

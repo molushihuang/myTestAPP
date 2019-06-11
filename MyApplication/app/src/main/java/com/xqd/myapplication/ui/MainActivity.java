@@ -1,10 +1,12 @@
-package com.xqd.myapplication;
+package com.xqd.myapplication.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
+import com.xqd.myapplication.util.EncryptUtil;
+import com.xqd.myapplication.R;
 
 public class MainActivity extends AppCompatActivity {
     TextView tvHello;

@@ -1,4 +1,4 @@
-package com.xqd.myapplication;
+package com.xqd.myapplication.util;
 
 /**
  * Created by 谢邱东 on 2019/5/28 14:50.
