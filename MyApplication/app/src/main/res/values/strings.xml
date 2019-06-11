@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">东爷测试</string>
     <string name="transition_name">doufu</string>
     <string name="transition_name2">hello</string>
     <string name="title_activity_contraint">ContraintActivity</string>
