@@ -2,7 +2,6 @@ package com.xqd.myapplication.upnp;
 
 
 import android.content.Context;
-import android.util.Log;
 import com.xqd.myapplication.util.CommomUtils;
 
 
@@ -32,8 +31,6 @@ public class DeviceManager implements IDeviceManager {
 //            Intent intent = new Intent(Intents.ACTION_CHANGE_DEVICE);
 //            sendBroadcast(intent);
 //        }
-
-        Log.i(TAG, "Change selected device.");
         mSelectedDevice = (ClingDevice) selectedDevice;
 
     }

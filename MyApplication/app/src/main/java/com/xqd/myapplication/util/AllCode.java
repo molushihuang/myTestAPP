@@ -7,6 +7,9 @@ package com.xqd.myapplication.util;
  */
 public class AllCode {
     public static String TEST_URL = "https://1146.cdn-vod.huaweicloud.com/asset/e1677b0edf077431494d1ec5b56ca961/33cb8d6a4079c9053aa76c14aa29a811.mp4";
+//    public static String TEST_URL = "https://56.com-t-56.com/20190602/23126_43452c92/index.m3u8";
+//    public static String TEST_URL = "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3794319251,3934771263&fm=26&gp=0.jpg";
+//    public static String TEST_URL = "http://dl.stream.qqmusic.qq.com/M500004DI5Vw0DnEOW.mp3?vkey=00CA210BC1AA2264A70245E0450B23EB2AC726E13A7C4DC1838500928C0144F42EE74D1B1C7C8E951B39715E6CA100CC22E69C509A279195&guid=5150825362&fromtag=1";
 
     /**
      * Prefix for all intents created
