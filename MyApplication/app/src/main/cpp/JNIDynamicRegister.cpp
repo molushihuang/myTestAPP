@@ -96,7 +96,7 @@ JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved) {
     };
 
     //找到对应的JNITools类
-    jclass jClassName = env->FindClass("com/xqd/myapplication/JNIUtil");
+    jclass jClassName = env->FindClass("com/xqd/myapplication/util/JNIUtil");
 
     //开始注册
     jint ret = env->RegisterNatives(jClassName, method, 6);

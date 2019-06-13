@@ -84,7 +84,6 @@ public class ProjectionActivity extends AppCompatActivity implements View.OnClic
             ClingManager clingUpnpServiceManager = ClingManager.getInstance();
             clingUpnpServiceManager.setUpnpService(beyondUpnpService);
             clingUpnpServiceManager.setDeviceManager(new DeviceManager());
-
             clingUpnpServiceManager.getRegistry().addListener(mBrowseRegistryListener);
             //Search on service created.
             clingUpnpServiceManager.searchDevices();
