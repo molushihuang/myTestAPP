@@ -13,11 +13,14 @@
 
 using namespace std;
 
+
 char *jstringTostring(JNIEnv *env, jstring jstr);
 
 string toMD5(string str);
 
 jstring password(JNIEnv *env, jobject, jstring userid, jstring time);
+
+
 
 jint addNumber(JNIEnv *env, jclass clazz, jint a, jint b) {
     return a + b;
@@ -117,6 +120,8 @@ JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved) {
  * @return
  */
 char *jstringTostring(JNIEnv *env, jstring jstr) {
+//    jboolean iscopy = NULL;
+//    char *rtn = (char *)(env->GetStringUTFChars(jstr, &iscopy));//将jstring转换成为UTF-8格式的char*，这种方式，中文字符可能会有问题
     char *rtn = NULL;
     jclass clsstring = env->FindClass("java/lang/String");
     jstring strencode = env->NewStringUTF("utf-8");

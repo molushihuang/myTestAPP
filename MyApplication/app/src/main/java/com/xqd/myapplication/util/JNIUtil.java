@@ -6,9 +6,16 @@ package com.xqd.myapplication.util;
  */
 public class JNIUtil {
 
+    public String name = "东爷";
+
+    public int getIntMethod() {
+        return 500;
+    }
+
     static {
         System.loadLibrary("demo");
     }
+
 
     /**
      * 静态注册的方法
@@ -24,6 +31,13 @@ public class JNIUtil {
 
     public native double divNumber(double a, double b);
 
+    public native String accessField();
+
+    public native int accessMethod();
+
+    public native long accessConstructor();
+
+    public native void giveArray(int[] array);
     /**
      * 动态注册的方法
      **/
@@ -36,7 +50,7 @@ public class JNIUtil {
 
     public native double div(double a, double b);
 
-    public native String getPassword(String userid,String time);
+    public native String getPassword(String userid, String time);
 
     public native String getMD5(String str);
 }

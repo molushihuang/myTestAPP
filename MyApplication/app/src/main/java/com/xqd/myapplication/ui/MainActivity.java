@@ -3,10 +3,10 @@ package com.xqd.myapplication.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import com.xqd.myapplication.R;
-import com.xqd.myapplication.util.EncryptUtil;
 import com.xqd.myapplication.util.JNIUtil;
 
 public class MainActivity extends AppCompatActivity {
@@ -37,9 +37,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        tvHello.setText(new JNIUtil().getName()+new JNIUtil().getPassword("ada")+new JNIUtil().add(1200,10));
-        tvHello.setText(EncryptUtil.getPassword("25830148ac174ebfa1db7a044d587ac0", "2019-06-04 22:12:05") + "\n"
-                + new JNIUtil().getPassword("25830148ac174ebfa1db7a044d587ac0", "2019-06-04 22:12:05"));
+//        tvHello.setText(EncryptUtil.getPassword("25830148ac174ebfa1db7a044d587ac0", "2019-06-04 22:12:05") + "\n"
+//                + new JNIUtil().getPassword("25830148ac174ebfa1db7a044d587ac0", "2019-06-04 22:12:05"));
+//        JNIUtil jniUtil = new JNIUtil();
+//        jniUtil.accessField();
+//        tvHello.setText(jniUtil.name);
+
+        tvHello.setText(new JNIUtil().accessConstructor() + "");
+
+        int[] array = {10, 5, 100, 78, 45};
+        new JNIUtil().giveArray(array);
+        for (int i : array) {
+            Log.e("数组排序", i + "");
+        }
 
 
 //        AnimatorSet objectAnimator = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.object_animator);
