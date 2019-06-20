@@ -93,13 +93,15 @@ Java_com_xqd_myapplication_util_JNIUtil_accessConstructor(JNIEnv *env, jobject o
     jobject dateObj = env->NewObject(cls, constructorID);//用构造方法声明一个新类
     jmethodID timeID = env->GetMethodID(cls, "getTime", "()J");//获取时间的方法id
     jlong time = env->CallLongMethod(dateObj, timeID);//调用这个时间类里获取时间的方法
+    env->DeleteLocalRef(dateObj);//通知垃圾回收器回收这些对象
     return time;
 
 }
 
 //排序规则，小的在前
-int compare(int *a, int *b) {
-    return (*a) - (*b);
+int compare (const void * a, const void * b)
+{
+    return ( *(int*)a - *(int*)b );
 }
 
 /**
@@ -109,8 +111,6 @@ extern "C" JNIEXPORT void JNICALL
 Java_com_xqd_myapplication_util_JNIUtil_giveArray(JNIEnv *env, jobject object,jintArray array) {
     jint *elems=env->GetIntArrayElements(array,NULL);//获取jint的指针
 
-    qsort(elems, env->GetArrayLength(array), sizeof(jint),
-          reinterpret_cast<int (*)(const void *, const void *)>(compare));
-
+    qsort(elems, env->GetArrayLength(array), sizeof(jint),compare);
     env->ReleaseIntArrayElements(array,elems,0);//操作这个数组并且释放资源
 }

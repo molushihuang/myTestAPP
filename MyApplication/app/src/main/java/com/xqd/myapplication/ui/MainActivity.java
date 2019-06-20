@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
             Log.e("数组排序", i + "");
         }
 
-
 //        AnimatorSet objectAnimator = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.object_animator);
 //        objectAnimator.setTarget(tvHello);
 //        objectAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
