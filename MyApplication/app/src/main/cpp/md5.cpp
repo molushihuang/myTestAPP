@@ -1,7 +1,7 @@
 #include "md5.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 
 #define GET_UINT32(n, b, i)                                      \
 {                                                                                      \
