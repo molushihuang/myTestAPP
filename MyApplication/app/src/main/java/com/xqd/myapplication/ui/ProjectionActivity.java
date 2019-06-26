@@ -1,8 +1,10 @@
 package com.xqd.myapplication.ui;
 
-import android.annotation.TargetApi;
 import android.content.*;
-import android.os.*;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -240,8 +242,8 @@ public class ProjectionActivity extends AppCompatActivity implements View.OnClic
                 @Override
                 public void success(IResponse response) {
                     mClingPlayControl.setCurrentState(DLANPlayState.PLAY);
-                    ClingManager.getInstance().registerAVTransport(mContext);
-                    ClingManager.getInstance().registerRenderingControl(mContext);
+//                    ClingManager.getInstance().registerAVTransport(mContext);
+//                    ClingManager.getInstance().registerRenderingControl(mContext);
                     btStop.postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -315,14 +317,20 @@ public class ProjectionActivity extends AppCompatActivity implements View.OnClic
     public void getPositionInfo() {
         if (mClingPlayControl.getCurrentState() == DLANPlayState.PLAY) {
             mClingPlayControl.getPositionInfo(new ControlReceiveCallback() {
-                @TargetApi(Build.VERSION_CODES.N)
                 @Override
                 public void receive(IResponse response) {
-                    ClingPositionResponse clingPositionResponse = (ClingPositionResponse) response;
+                    final ClingPositionResponse clingPositionResponse = (ClingPositionResponse) response;
                     Log.e(TAG,"百分比"+clingPositionResponse.getResponse().getElapsedPercent());
                     if (!seek && response != null && clingPositionResponse != null) {
                         sbProgress.setMax((int) clingPositionResponse.getResponse().getTrackDurationSeconds());
-                        sbProgress.setProgress((int) clingPositionResponse.getResponse().getTrackElapsedSeconds(), true);
+                        sbProgress.setProgress((int) clingPositionResponse.getResponse().getTrackElapsedSeconds());
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                tvSelected.setText(clingPositionResponse.getResponse().getRelTime()+" / "+clingPositionResponse.getResponse().getTrackDuration());
+
+                            }
+                        });
                         if (clingPositionResponse.getResponse().getElapsedPercent()>=99) {
                             stop();
                         }
@@ -331,6 +339,7 @@ public class ProjectionActivity extends AppCompatActivity implements View.OnClic
 
                 @Override
                 public void success(IResponse response) {
+                    Log.e(TAG,"success");
                     btStop.postDelayed(new Runnable() {
                         @Override
                         public void run() {
