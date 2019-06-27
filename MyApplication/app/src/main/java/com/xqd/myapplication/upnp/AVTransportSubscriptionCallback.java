@@ -33,7 +33,7 @@ public class AVTransportSubscriptionCallback extends BaseSubscriptionCallback {
         Map values = subscription.getCurrentValues();
         if (values != null && values.containsKey("LastChange")) {
             String lastChangeValue = values.get("LastChange").toString();
-            Log.i(TAG, "LastChange:" + lastChangeValue);
+            Log.e(TAG, "LastChange:" + lastChangeValue);
             doAVTransportChange(lastChangeValue);
         }
     }

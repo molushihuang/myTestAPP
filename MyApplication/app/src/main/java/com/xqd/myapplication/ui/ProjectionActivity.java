@@ -2,9 +2,7 @@ package com.xqd.myapplication.ui;
 
 import android.content.*;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.IBinder;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -70,7 +68,6 @@ public class ProjectionActivity extends AppCompatActivity implements View.OnClic
      * 投屏控制器
      */
     private ClingPlayControl mClingPlayControl = new ClingPlayControl();
-    private Handler mHandler = new InnerHandler();
     private BroadcastReceiver mTransportStateBroadcastReceiver;
 
     /**
@@ -124,7 +121,6 @@ public class ProjectionActivity extends AppCompatActivity implements View.OnClic
         btStop.setOnClickListener(this);
         sbProgress.setOnSeekBarChangeListener(this);
         sbVolume.setOnSeekBarChangeListener(this);
-
 
         sbVolume.setMax(100);
     }
@@ -242,19 +238,18 @@ public class ProjectionActivity extends AppCompatActivity implements View.OnClic
                 @Override
                 public void success(IResponse response) {
                     mClingPlayControl.setCurrentState(DLANPlayState.PLAY);
-//                    ClingManager.getInstance().registerAVTransport(mContext);
-//                    ClingManager.getInstance().registerRenderingControl(mContext);
-                    btStop.postDelayed(new Runnable() {
+                    ClingManager.getInstance().registerAVTransport(mContext);
+                    ClingManager.getInstance().registerRenderingControl(mContext);
+                    btStop.post(new Runnable() {
                         @Override
                         public void run() {
                             getPositionInfo();
                         }
-                    }, 1000);
+                    });
                 }
 
                 @Override
                 public void fail(IResponse response) {
-//                    mHandler.sendEmptyMessage(ERROR_ACTION);
                 }
             });
         } else {
@@ -262,12 +257,12 @@ public class ProjectionActivity extends AppCompatActivity implements View.OnClic
                 @Override
                 public void success(IResponse response) {
                     mClingPlayControl.setCurrentState(DLANPlayState.PLAY);
-                    btStop.postDelayed(new Runnable() {
+                    btStop.post(new Runnable() {
                         @Override
                         public void run() {
                             getPositionInfo();
                         }
-                    }, 1000);
+                    });
                 }
 
                 @Override
@@ -320,18 +315,18 @@ public class ProjectionActivity extends AppCompatActivity implements View.OnClic
                 @Override
                 public void receive(IResponse response) {
                     final ClingPositionResponse clingPositionResponse = (ClingPositionResponse) response;
-                    Log.e(TAG,"百分比"+clingPositionResponse.getResponse().getElapsedPercent());
+                    Log.e(TAG, "百分比" + clingPositionResponse.getResponse().getElapsedPercent());
                     if (!seek && response != null && clingPositionResponse != null) {
                         sbProgress.setMax((int) clingPositionResponse.getResponse().getTrackDurationSeconds());
                         sbProgress.setProgress((int) clingPositionResponse.getResponse().getTrackElapsedSeconds());
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                tvSelected.setText(clingPositionResponse.getResponse().getRelTime()+" / "+clingPositionResponse.getResponse().getTrackDuration());
+                                tvSelected.setText(clingPositionResponse.getResponse().getRelTime() + " / " + clingPositionResponse.getResponse().getTrackDuration());
 
                             }
                         });
-                        if (clingPositionResponse.getResponse().getElapsedPercent()>=99) {
+                        if (clingPositionResponse.getResponse().getElapsedPercent() >= 99) {
                             stop();
                         }
                     }
@@ -339,7 +334,7 @@ public class ProjectionActivity extends AppCompatActivity implements View.OnClic
 
                 @Override
                 public void success(IResponse response) {
-                    Log.e(TAG,"success");
+                    Log.e(TAG, "success");
                     btStop.postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -419,57 +414,23 @@ public class ProjectionActivity extends AppCompatActivity implements View.OnClic
             String action = intent.getAction();
             Log.e(TAG, "Receive playback intent:" + action);
             if (AllCode.ACTION_PLAYING.equals(action)) {
-                mHandler.sendEmptyMessage(PLAY_ACTION);
-
+                mClingPlayControl.setCurrentState(DLANPlayState.PLAY);
             } else if (AllCode.ACTION_PAUSED_PLAYBACK.equals(action)) {
-                mHandler.sendEmptyMessage(PAUSE_ACTION);
+                mClingPlayControl.setCurrentState(DLANPlayState.PAUSE);
 
             } else if (AllCode.ACTION_STOPPED.equals(action)) {
-                mHandler.sendEmptyMessage(STOP_ACTION);
+                mClingPlayControl.setCurrentState(DLANPlayState.STOP);
 
             } else if (AllCode.ACTION_TRANSITIONING.equals(action)) {
-                mHandler.sendEmptyMessage(TRANSITIONING_ACTION);
+                showTaost("正在连接");
             }
         }
     }
 
-    private final class InnerHandler extends Handler {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case PLAY_ACTION:
-                    Log.i(TAG, "Execute PLAY_ACTION");
-                    Toast.makeText(ProjectionActivity.this, "正在投放", Toast.LENGTH_SHORT).show();
-                    mClingPlayControl.setCurrentState(DLANPlayState.PLAY);
-
-                    break;
-                case PAUSE_ACTION:
-                    Log.i(TAG, "Execute PAUSE_ACTION");
-                    mClingPlayControl.setCurrentState(DLANPlayState.PAUSE);
-
-                    break;
-                case STOP_ACTION:
-                    Log.i(TAG, "Execute STOP_ACTION");
-                    mClingPlayControl.setCurrentState(DLANPlayState.STOP);
-
-                    break;
-                case TRANSITIONING_ACTION:
-                    Log.i(TAG, "Execute TRANSITIONING_ACTION");
-                    Toast.makeText(ProjectionActivity.this, "正在连接", Toast.LENGTH_SHORT).show();
-                    break;
-                case ERROR_ACTION:
-                    Log.e(TAG, "Execute ERROR_ACTION");
-                    Toast.makeText(ProjectionActivity.this, "投放失败", Toast.LENGTH_SHORT).show();
-                    break;
-            }
-        }
-    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mHandler.removeCallbacksAndMessages(null);
         unbindService(mUpnpServiceConnection);
         unregisterReceiver(mTransportStateBroadcastReceiver);
 
@@ -477,7 +438,7 @@ public class ProjectionActivity extends AppCompatActivity implements View.OnClic
         ClingDeviceList.getInstance().destroy();
     }
 
-    private void showTaost(String tip){
+    private void showTaost(String tip) {
         Toast.makeText(ProjectionActivity.this, tip, Toast.LENGTH_SHORT).show();
     }
 }

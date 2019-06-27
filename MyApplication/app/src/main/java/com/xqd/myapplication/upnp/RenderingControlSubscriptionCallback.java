@@ -40,7 +40,7 @@ public class RenderingControlSubscriptionCallback extends BaseSubscriptionCallba
         }
 
         String lastChangeValue = values.get("LastChange").toString();
-        Log.i(TAG, "LastChange:" + lastChangeValue);
+        Log.e(TAG, "LastChange:" + lastChangeValue);
         LastChange lastChange;
         try {
             lastChange = new LastChange(new RenderingControlLastChangeParser(), lastChangeValue);
