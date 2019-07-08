@@ -3,11 +3,15 @@ package com.xqd.myapplication.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import com.xqd.myapplication.R;
+import com.xqd.myapplication.util.EncryptUtil;
 import com.xqd.myapplication.util.JNIUtil;
+
+import java.io.UnsupportedEncodingException;
 
 public class MainActivity extends AppCompatActivity {
     TextView tvHello;
@@ -50,6 +54,24 @@ public class MainActivity extends AppCompatActivity {
         for (int i : array) {
             Log.e("数组排序", i + "");
         }
+
+        String oldWord = "libBaiduMapSDK_map_for_bikenavi_v5_4_0";
+        String encodeWord = null;
+        try {
+            encodeWord = Base64.encodeToString(oldWord.getBytes("utf-8"), Base64.NO_WRAP);
+            Log.e("base64编码》", encodeWord);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            String decodeWord = new String(Base64.decode(encodeWord, Base64.NO_WRAP), "utf-8");
+            Log.e("base64解码》", decodeWord);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        Log.e("签名", EncryptUtil.getSignature(this));
 
 //        AnimatorSet objectAnimator = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.object_animator);
 //        objectAnimator.setTarget(tvHello);

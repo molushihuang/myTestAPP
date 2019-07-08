@@ -1,7 +1,9 @@
 package com.xqd.myapplication.util;
 
 import android.content.Context;
-import android.provider.Settings;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 
 import javax.crypto.Mac;
 import javax.crypto.SecretKey;
@@ -19,13 +21,6 @@ import java.security.NoSuchAlgorithmException;
 
 public class EncryptUtil {
 
-	public static boolean enableAdb(Context mContext){
-		return Settings.Secure.getInt(mContext.getContentResolver(), Settings.Secure.ADB_ENABLED, 0) > 0;
-	}
-
-	public static boolean enableLocation(Context mContext){
-		return  Settings.Secure.getInt(mContext.getContentResolver(),Settings.Secure.ALLOW_MOCK_LOCATION, 0) != 0;
-	}
 
 	public static String getPassword(String str1, String str2) {
 		String password = "";
@@ -165,4 +160,25 @@ public class EncryptUtil {
 		}
 		return hs.toString();
 	}
+
+	public static String getSignature(Context context) {
+		try {
+			PackageManager packageManager = context.getPackageManager();
+
+			Signature[] signatures= new Signature[0];
+			if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
+				PackageInfo packageInfo = packageManager.getPackageInfo(context.getPackageName(), PackageManager.GET_SIGNING_CERTIFICATES);
+				signatures = packageInfo.signingInfo.getSigningCertificateHistory();
+			}else{
+				PackageInfo packageInfo = packageManager.getPackageInfo(context.getPackageName(), PackageManager.GET_SIGNATURES);
+				signatures = packageInfo.signatures;
+			}
+			return signatures[0].toCharsString();
+
+		} catch (PackageManager.NameNotFoundException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }

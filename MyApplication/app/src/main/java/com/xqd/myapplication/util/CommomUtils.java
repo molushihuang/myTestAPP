@@ -1,5 +1,8 @@
 package com.xqd.myapplication.util;
 
+import android.content.Context;
+import android.provider.Settings;
+
 import java.util.Collection;
 import java.util.Formatter;
 import java.util.Locale;
@@ -60,4 +63,14 @@ public class CommomUtils {
 
         return second * 1000;
     }
+
+    public static boolean enableAdb(Context mContext){
+        return Settings.Secure.getInt(mContext.getContentResolver(), Settings.Secure.ADB_ENABLED, 0) > 0;
+    }
+
+    public static boolean enableLocation(Context mContext){
+        return  Settings.Secure.getInt(mContext.getContentResolver(),Settings.Secure.ALLOW_MOCK_LOCATION, 0) != 0;
+    }
+
+
 }
