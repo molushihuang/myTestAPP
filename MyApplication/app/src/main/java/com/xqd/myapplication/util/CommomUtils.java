@@ -72,5 +72,4 @@ public class CommomUtils {
         return  Settings.Secure.getInt(mContext.getContentResolver(),Settings.Secure.ALLOW_MOCK_LOCATION, 0) != 0;
     }
 
-
 }

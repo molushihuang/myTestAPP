@@ -1,5 +1,7 @@
 package com.xqd.myapplication.util;
 
+import android.content.Context;
+
 /**
  * Created by 谢邱东 on 2019/5/28 14:50.
  * NO bug
@@ -38,6 +40,7 @@ public class JNIUtil {
     public native long accessConstructor();
 
     public native void giveArray(int[] array);
+
     /**
      * 动态注册的方法
      **/
@@ -53,4 +56,6 @@ public class JNIUtil {
     public native String getPassword(String userid, String time);
 
     public native String getMD5(String str);
+
+    public static native String getSignature(Context context);
 }

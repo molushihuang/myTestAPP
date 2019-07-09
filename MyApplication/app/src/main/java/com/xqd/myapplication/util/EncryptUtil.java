@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.util.Base64;
 
 import javax.crypto.Mac;
 import javax.crypto.SecretKey;
@@ -20,29 +21,6 @@ import java.security.NoSuchAlgorithmException;
  */
 
 public class EncryptUtil {
-
-
-	public static String getPassword(String str1, String str2) {
-		String password = "";
-		// 截取beginTime最后两位用于替换字符
-		String timeLast = str2.substring(str2.length() - 2, str2.length());
-		// memberId使用MD5加密后替换5到6位字符
-		StringBuilder sb = new StringBuilder(EncryptUtil.md5(str1));
-		System.out.println(sb.toString());
-		String p = sb.replace(6, 8, timeLast).toString();
-		System.out.println(p);
-		// beginTime使用MD5加密后替换9到10位字符
-		StringBuilder sb2 = new StringBuilder(EncryptUtil.md5(str2));
-		System.out.println(sb2.toString());
-		String pp = sb2.replace(10, 12, timeLast).toString();
-		System.out.println(pp);
-		// 组合后使用MD5加密后替换15到16位字符
-		StringBuilder sb3 = new StringBuilder(EncryptUtil.md5(p + pp));
-		System.out.println(sb3.toString());
-		password = sb3.replace(16, 18, timeLast).toString();
-		System.out.println(password);
-		return password;
-	}
 
 	/**
 	 * md5加密
@@ -161,6 +139,11 @@ public class EncryptUtil {
 		return hs.toString();
 	}
 
+	/**
+	 * 获取应用签名
+	 * @param context
+	 * @return
+	 */
 	public static String getSignature(Context context) {
 		try {
 			PackageManager packageManager = context.getPackageManager();
@@ -179,6 +162,37 @@ public class EncryptUtil {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+
+	/**
+	 * 获取base64编码后的字符串
+	 * @param oldWord
+	 * @return
+	 */
+	public static String getBase64Encode(String oldWord){
+		String encodeWord = null;
+		try {
+			encodeWord = Base64.encodeToString(oldWord.getBytes("utf-8"), Base64.NO_WRAP);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return encodeWord;
+	}
+
+	/**
+	 * 获取base64解码后的数据
+	 * @param encodeWord
+	 * @return
+	 */
+	public static String getBase64Decode(String encodeWord){
+		String decodeWord = null;
+		try {
+			decodeWord = new String(Base64.decode(encodeWord, Base64.NO_WRAP), "utf-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return decodeWord;
 	}
 
 }
