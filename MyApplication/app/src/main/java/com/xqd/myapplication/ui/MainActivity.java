@@ -7,7 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import com.xqd.myapplication.R;
-import com.xqd.myapplication.util.EncryptUtil;
+import com.xqd.myapplication.util.AESUtil;
 import com.xqd.myapplication.util.JNIUtil;
 
 public class MainActivity extends AppCompatActivity {
@@ -38,9 +38,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        tvHello.setText(EncryptUtil.getPassword("25830148ac174ebfa1db7a044d587ac0", "2019-06-04 22:12:05") + "\n"
-//                + new JNIUtil().getPassword("25830148ac174ebfa1db7a044d587ac0", "2019-06-04 22:12:05"));
-//        JNIUtil jniUtil = new JNIUtil();
 //        jniUtil.accessField();
 //        tvHello.setText(jniUtil.name);
 
@@ -51,9 +48,11 @@ public class MainActivity extends AppCompatActivity {
         for (int i : array) {
             Log.e("数组排序", i + "");
         }
+        Log.e("AES加密",AESUtil.getInstance().encrypt("草泥马"));
+        Log.e("AES解密",AESUtil.getInstance().decrypt("OBz8V5O4uA4FBhQJFfCMgg=="));
 
-        Log.e("签名", EncryptUtil.md5(EncryptUtil.getSignature(this)));
-        Log.e("c签名", EncryptUtil.md5(JNIUtil.getSignature(MainActivity.this)));
+//        Log.e("签名", EncryptUtil.md5(EncryptUtil.getSignature(this)));
+//        Log.e("c签名", EncryptUtil.md5(JNIUtil.getSignature(MainActivity.this)));
 
 //        AnimatorSet objectAnimator = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.object_animator);
 //        objectAnimator.setTarget(tvHello);

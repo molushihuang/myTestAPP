@@ -59,30 +59,28 @@ jstring getPackname(JNIEnv *env, jobject obj, jobject contextObject) {
  * @return
  */
 jstring signature(JNIEnv *env, jobject ob, jobject contextObject) {
-    jclass native_class = env->GetObjectClass(contextObject);
+    jclass native_class = env->GetObjectClass(contextObject);//获取到Context类
+    //获取到getPackageManager的方法id，第二个参数方法名，第三个参数签名，入参跟返回值的签名
     jmethodID pm_id = env->GetMethodID(native_class, "getPackageManager", "()Landroid/content/pm/PackageManager;");
-    jobject pm_obj = env->CallObjectMethod(contextObject, pm_id);
-    jclass pm_clazz = env->GetObjectClass(pm_obj);
+    jobject pm_obj = env->CallObjectMethod(contextObject, pm_id);//通过方法id调用getPackageManager方法返回PackageManager
+    jclass pm_clazz = env->GetObjectClass(pm_obj);//获取到PackageManager类
     // 得到 getPackageInfo 方法的 ID
-    jmethodID package_info_id = env->GetMethodID(pm_clazz, "getPackageInfo",
-                                                 "(Ljava/lang/String;I)Landroid/content/pm/PackageInfo;");
-    jclass native_classs = env->GetObjectClass(contextObject);
-    jmethodID mId = env->GetMethodID(native_classs, "getPackageName", "()Ljava/lang/String;");
-    jstring pkg_str = static_cast<jstring>(env->CallObjectMethod(contextObject, mId));
-    // 获得应用包的信息
+    jmethodID package_info_id = env->GetMethodID(pm_clazz, "getPackageInfo","(Ljava/lang/String;I)Landroid/content/pm/PackageInfo;");
+
+    jmethodID mId = env->GetMethodID(native_class, "getPackageName", "()Ljava/lang/String;");//context的方法获取包名
+    jstring pkg_str = static_cast<jstring>(env->CallObjectMethod(contextObject, mId));//调用getPackageName方法获取包名
+    // 通过getPackageInfo方法返回PackageInfo，第三个参数是包名，最后一个参数是flag，64代表十六进制的PackageManager.GET_SIGNATURES（0x00000040）
     jobject pi_obj = env->CallObjectMethod(pm_obj, package_info_id, pkg_str, 64);
     // 获得 PackageInfo 类
     jclass pi_clazz = env->GetObjectClass(pi_obj);
     // 获得签名数组属性的 ID
     jfieldID signatures_fieldId = env->GetFieldID(pi_clazz, "signatures", "[Landroid/content/pm/Signature;");
-    jobject signatures_obj = env->GetObjectField(pi_obj, signatures_fieldId);
-    jobjectArray signaturesArray = (jobjectArray) signatures_obj;
-    jsize size = env->GetArrayLength(signaturesArray);
-    jobject signature_obj = env->GetObjectArrayElement(signaturesArray, 0);
-    jclass signature_clazz = env->GetObjectClass(signature_obj);
-    jmethodID string_id = env->GetMethodID(signature_clazz, "toCharsString", "()Ljava/lang/String;");
-    jstring str = static_cast<jstring>(env->CallObjectMethod(signature_obj, string_id));
-    char *c_msg = (char *) env->GetStringUTFChars(str, 0);
+    jobjectArray signaturesArray = (jobjectArray) env->GetObjectField(pi_obj, signatures_fieldId);//获取到签名数组
+    jsize size = env->GetArrayLength(signaturesArray);//数组的大小
+    jobject signature_obj = env->GetObjectArrayElement(signaturesArray, 0);//取出数组第一个
+    jclass signature_clazz = env->GetObjectClass(signature_obj);//获取Signature类
+    jmethodID string_id = env->GetMethodID(signature_clazz, "toCharsString", "()Ljava/lang/String;");//toCharsString的方法id
+    jstring str = static_cast<jstring>(env->CallObjectMethod(signature_obj, string_id));//执行toCharsString方法
     return str;
 }
 
