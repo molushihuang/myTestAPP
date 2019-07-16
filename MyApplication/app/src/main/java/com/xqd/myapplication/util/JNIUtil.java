@@ -8,6 +8,14 @@ import android.content.Context;
  */
 public class JNIUtil {
 
+    public static final int MODE_NORMAL = 0;
+    public static final int MODE_LUOLI = 1;
+    public static final int MODE_DASHU = 2;
+    public static final int MODE_JINGSONG = 3;
+    public static final int MODE_GAOGUAI = 4;
+    public static final int MODE_KONGLING = 5;
+    public boolean playing = false;
+
     public String name = "东爷";
 
     public int getIntMethod() {
@@ -15,15 +23,33 @@ public class JNIUtil {
     }
 
     static {
+
+        System.loadLibrary("fmod");
+        System.loadLibrary("fmodL");
         System.loadLibrary("demo");
     }
 
+    /**
+     * 专门提供给JNI使用
+     * @param flag
+     */
+    private void setPlaying(boolean flag){
+        playing = flag;
+    }
+
+    /**
+     * 用来判断是否正在播放，如果是就不能再播放
+     * @return
+     */
+    public boolean isPlaying() {
+        return playing;
+    }
 
     /**
      * 静态注册的方法
      */
 
-    public native String getName();
+    public static  native String getName();
 
     public native int addNumber(int a, int b);
 
@@ -40,6 +66,8 @@ public class JNIUtil {
     public native long accessConstructor();
 
     public native void giveArray(int[] array);
+
+    public  native void fix(String path,int type);
 
     /**
      * 动态注册的方法

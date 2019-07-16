@@ -9,7 +9,7 @@ cmake_minimum_required(VERSION 3.4.1)
 # or SHARED, and provides the relative paths to its source code.
 # You can define multiple libraries, and CMake builds them for you.
 # Gradle automatically packages shared libraries with your APK.
-
+set(distribution_DIR ../../../../libs)
 add_library( # Sets the name of the library.
         demo
 
@@ -17,6 +17,7 @@ add_library( # Sets the name of the library.
         SHARED
 
         # Provides a relative path to your source file(s).
+        effects_qq_voicer.cpp
         JNItest.cpp
         md5.h
         md5.cpp
@@ -27,6 +28,18 @@ add_library( # Sets the name of the library.
 # default, you only need to specify the name of the public NDK library
 # you want to add. CMake verifies that the library exists before
 # completing its build.
+
+#把libfmod.so预加载进来
+add_library(fmod SHARED IMPORTED)
+set_target_properties(fmod
+        PROPERTIES IMPORTED_LOCATION
+        ${distribution_DIR}/${ANDROID_ABI}/libfmod.so)
+#把libfmodL.so预加载进来
+add_library(fmodL SHARED IMPORTED)
+set_target_properties(fmodL
+        PROPERTIES IMPORTED_LOCATION
+        ${distribution_DIR}/${ANDROID_ABI}/libfmodL.so)
+
 
 find_library( # Sets the name of the path variable.
         log-lib
@@ -41,7 +54,8 @@ find_library( # Sets the name of the path variable.
 
 target_link_libraries( # Specifies the target library.
         demo
-
+        fmod
+        fmodL
         # Links the target library to the log library
         # included in the NDK.
         ${log-lib})

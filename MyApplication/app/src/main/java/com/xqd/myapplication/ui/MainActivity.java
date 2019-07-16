@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
 //
 //        ActivityCompat.startActivity(MainActivity.this, new Intent(MainActivity.this, SecondActivity.class), compat.toBundle());
 
-        startActivity(new Intent(this, ProjectionActivity.class));
+        startActivity(new Intent(this, VoiceActivity.class));
     }
 
 
