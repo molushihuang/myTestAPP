@@ -9,7 +9,12 @@ cmake_minimum_required(VERSION 3.4.1)
 # or SHARED, and provides the relative paths to its source code.
 # You can define multiple libraries, and CMake builds them for you.
 # Gradle automatically packages shared libraries with your APK.
-set(distribution_DIR ../../../../libs)
+
+#设置要引用的第三方so库所在的路径，${CMAKE_CURRENT_SOURCE_DIR}表示当前CMakeLists.txt所在的位置
+#通过 ${CMAKE_CURRENT_SOURCE_DIR}/../../../libs 表示出libs的位置
+set(distribution_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../../libs)
+#创建自己的库
+#库名字 动态库 文件
 add_library( # Sets the name of the library.
         demo
 
@@ -17,6 +22,7 @@ add_library( # Sets the name of the library.
         SHARED
 
         # Provides a relative path to your source file(s).
+        # 资源路径是相对路径，相对于本CMakeLists.txt所在目录
         effects_qq_voicer.cpp
         JNItest.cpp
         md5.h
@@ -30,10 +36,14 @@ add_library( # Sets the name of the library.
 # completing its build.
 
 #把libfmod.so预加载进来
+#库名字 动态库 导入的
 add_library(fmod SHARED IMPORTED)
+#改变这个库的属性
+#库名字 属性 导入位置
 set_target_properties(fmod
         PROPERTIES IMPORTED_LOCATION
         ${distribution_DIR}/${ANDROID_ABI}/libfmod.so)
+
 #把libfmodL.so预加载进来
 add_library(fmodL SHARED IMPORTED)
 set_target_properties(fmodL
