@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 import com.xqd.myapplication.R;
 import com.xqd.myapplication.util.AESUtil;
+import com.xqd.myapplication.util.EncryptUtil;
 import com.xqd.myapplication.util.JNIUtil;
 
 public class MainActivity extends AppCompatActivity {
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         for (int i : array) {
             Log.e("数组排序", i + "");
         }
+        Log.e("base64", EncryptUtil.getBase64Encode("BaiduMapSDK_map_for_bikenavi_v5_4_0"));
         Log.e("AES加密",AESUtil.getInstance().encrypt("草泥马"));
         Log.e("AES解密",AESUtil.getInstance().decrypt("OBz8V5O4uA4FBhQJFfCMgg=="));
 
@@ -86,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
 //
 //        ActivityCompat.startActivity(MainActivity.this, new Intent(MainActivity.this, SecondActivity.class), compat.toBundle());
 
-        startActivity(new Intent(this, VoiceActivity.class));
+        startActivity(new Intent(this, FfmpegActivity.class));
     }
 
 

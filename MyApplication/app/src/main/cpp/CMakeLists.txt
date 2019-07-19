@@ -29,6 +29,28 @@ add_library( # Sets the name of the library.
         md5.cpp
         JNIDynamicRegister.cpp)
 
+add_library( # Sets the name of the library.
+        my_ffmpeg
+
+        # Sets the library as a shared library.
+        SHARED
+
+        # Provides a relative path to your source file(s).
+        ffm/jx_yuv_encode_h264.cpp
+        ffm/jx_pcm_encode_aac.cpp
+        ffm/jx_media_muxer.cpp
+        ffm/jx_jni_handler.cpp
+        ffm/jx_ffmpeg_jni.cpp
+        ffm/threadsafe_queue.cpp
+        ffm/jx_log.cpp
+        ffm/cmdutils.c
+        ffm/ffmpeg.c
+        ffm/ffmpeg_filter.c
+        ffm/ffmpeg_opt.c
+        ffm/jx_ffmpeg_cmd_run.c
+        ffm/jx_ffmpeg_config.cpp
+        )
+
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by
 # default, you only need to specify the name of the public NDK library
@@ -50,6 +72,59 @@ set_target_properties(fmodL
         PROPERTIES IMPORTED_LOCATION
         ${distribution_DIR}/${ANDROID_ABI}/libfmodL.so)
 
+add_library(avcodec SHARED IMPORTED)
+set_target_properties(
+        avcodec
+        PROPERTIES IMPORTED_LOCATION
+        ${distribution_DIR}/${ANDROID_ABI}/libavcodec.so
+)
+
+add_library(avfilter SHARED IMPORTED)
+set_target_properties(
+        avfilter
+        PROPERTIES IMPORTED_LOCATION
+        ${distribution_DIR}/${ANDROID_ABI}/libavfilter.so
+)
+
+add_library(avformat SHARED IMPORTED)
+set_target_properties(
+        avformat
+        PROPERTIES IMPORTED_LOCATION
+        ${distribution_DIR}/${ANDROID_ABI}/libavformat.so
+)
+
+add_library(avutil SHARED IMPORTED)
+set_target_properties(
+        avutil
+        PROPERTIES IMPORTED_LOCATION
+        ${distribution_DIR}/${ANDROID_ABI}/libavutil.so
+)
+
+add_library(swresample SHARED IMPORTED)
+set_target_properties(
+        swresample
+        PROPERTIES IMPORTED_LOCATION
+        ${distribution_DIR}/${ANDROID_ABI}/libswresample.so
+)
+
+add_library(swscale SHARED IMPORTED)
+set_target_properties(
+        swscale
+        PROPERTIES IMPORTED_LOCATION
+        ${distribution_DIR}/${ANDROID_ABI}/libswscale.so
+)
+
+add_library(fdk-aac SHARED IMPORTED)
+set_target_properties(
+        fdk-aac
+        PROPERTIES IMPORTED_LOCATION
+        ${distribution_DIR}/${ANDROID_ABI}/libfdk-aac.so
+)
+
+include_directories(
+        ${CMAKE_CURRENT_SOURCE_DIR}/../../../ffmpeg-3.2.5/
+
+)
 
 find_library( # Sets the name of the path variable.
         log-lib
@@ -64,8 +139,16 @@ find_library( # Sets the name of the path variable.
 
 target_link_libraries( # Specifies the target library.
         demo
+        my_ffmpeg
         fmod
         fmodL
+        fdk-aac
+        avcodec
+        avfilter
+        avformat
+        avutil
+        swresample
+        swscale
         # Links the target library to the log library
         # included in the NDK.
         ${log-lib})

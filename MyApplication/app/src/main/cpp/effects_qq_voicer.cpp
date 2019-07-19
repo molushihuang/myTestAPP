@@ -9,8 +9,8 @@
 #include <android/log.h>
 #include <jni.h>
 
-#define LOGI(FORMAT,...) __android_log_print(ANDROID_LOG_INFO,"kpioneer",FORMAT,##__VA_ARGS__);
-#define LOGE(FORMAT,...) __android_log_print(ANDROID_LOG_ERROR,"kpioneer",FORMAT,##__VA_ARGS__);
+#define LOGI(FORMAT,...) __android_log_print(ANDROID_LOG_INFO,"effects_qq_voicer",FORMAT,##__VA_ARGS__);
+#define LOGE(FORMAT,...) __android_log_print(ANDROID_LOG_ERROR,"effects_qq_voicer",FORMAT,##__VA_ARGS__);
 
 #define MODE_NORMAL  0
 #define MODE_LUOLI 1
@@ -23,7 +23,7 @@ using namespace FMOD;
 
 extern "C" JNIEXPORT void JNICALL
 Java_com_xqd_myapplication_util_JNIUtil_fix(JNIEnv *env, jobject jobj, jstring path_jstr, jint type) {
-	LOGI("%s", "fix normal55555555555");
+    LOGE("%s", "进入到变声方法");
 	System *system;
 	Sound *sound;
 	Channel *channel;
@@ -33,9 +33,10 @@ Java_com_xqd_myapplication_util_JNIUtil_fix(JNIEnv *env, jobject jobj, jstring p
 
 	const char* path_cstr = env->GetStringUTFChars(path_jstr, NULL);
     //设置正在播放声音
-    jclass  jclaz = (env)->GetObjectClass(jobj);
-    jmethodID mid = (env)->GetMethodID(jclaz,"setPlaying","(Z)V");
-    (env)->CallVoidMethod(jobj,mid,playing);
+    jclass  jclaz = env->GetObjectClass(jobj);
+    jmethodID mid = env->GetMethodID(jclaz,"setPlaying","(Z)V");
+    env->CallVoidMethod(jobj,mid,playing);
+
 	try {
 	//初始化
 	System_Create(&system);
@@ -46,9 +47,9 @@ Java_com_xqd_myapplication_util_JNIUtil_fix(JNIEnv *env, jobject jobj, jstring p
 	switch (type) {
 	case MODE_NORMAL:
 		//原生播放
-		LOGI("%s", path_cstr);
+        LOGE("%s", path_cstr);
 		system->playSound(sound, 0, false, &channel);
-		LOGI("%s", "fix normal");
+		LOGE("%s", "fix normal");
 		break;
 	case MODE_LUOLI:
 		//萝莉
@@ -62,19 +63,16 @@ Java_com_xqd_myapplication_util_JNIUtil_fix(JNIEnv *env, jobject jobj, jstring p
 		system->playSound(sound, 0, false, &channel);
 		//添加到channel
 		channel->addDSP(0, dsp);
-		LOGI("%s", "fix luoli");
+		LOGE("%s", "fix luoli");
 		break;
-
 	case MODE_DASHU:
 		//大叔
 		system->createDSPByType(FMOD_DSP_TYPE_PITCHSHIFT, &dsp);
 		dsp->setParameterFloat(FMOD_DSP_PITCHSHIFT_PITCH, 0.8);
-
 		system->playSound(sound, 0, false, &channel);
 		//添加到channel
 		channel->addDSP(0, dsp);
-		LOGI("%s", "fix dashu");
-		break;
+		LOGE("%s", "fix dashu");
 		break;
 	case MODE_JINGSONG:
 		//惊悚
@@ -90,7 +88,7 @@ Java_com_xqd_myapplication_util_JNIUtil_fix(JNIEnv *env, jobject jobj, jstring p
 		channel->getFrequency(&frequency);
 		frequency = frequency * 1.6;
 		channel->setFrequency(frequency);
-		LOGI("%s", "fix gaoguai");
+		LOGE("%s", "fix gaoguai");
 		break;
 	case MODE_KONGLING:
 	    //空灵
@@ -99,7 +97,7 @@ Java_com_xqd_myapplication_util_JNIUtil_fix(JNIEnv *env, jobject jobj, jstring p
         dsp->setParameterFloat(FMOD_DSP_ECHO_FEEDBACK, 20);
         system->playSound(sound, 0, false, &channel);
         channel->addDSP(0, dsp);
-        LOGI("%s", "fix kongling");
+        LOGE("%s", "fix kongling");
 
 		break;
 

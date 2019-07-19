@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-
 android {
     compileSdkVersion 28
     buildToolsVersion "28.0.3"
@@ -19,12 +18,14 @@ android {
 
         externalNativeBuild {
             cmake {
-                cppFlags ""
+//                cppFlags "-std=c++11"
                 abiFilters "armeabi-v7a"
             }
         }
     }
-
+    lintOptions {
+        abortOnError false
+    }
     sourceSets {
         main {
             jni.srcDirs = []
