@@ -10,18 +10,20 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
-        ndk {
-            // 设置支持的SO库架构
-            abiFilters "armeabi-v7a"
-
-        }
-
         externalNativeBuild {
             cmake {
 //                cppFlags "-std=c++11"
                 abiFilters "armeabi-v7a"
             }
         }
+
+        ndk {
+            // 设置支持的SO库架构
+            abiFilters "armeabi-v7a"
+
+        }
+
+
     }
     lintOptions {
         abortOnError false
