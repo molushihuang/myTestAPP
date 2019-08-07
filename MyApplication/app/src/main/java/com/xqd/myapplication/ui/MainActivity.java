@@ -1,6 +1,5 @@
 package com.xqd.myapplication.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -53,6 +52,16 @@ public class MainActivity extends AppCompatActivity {
         Log.e("AES加密",AESUtil.getInstance().encrypt("草泥马"));
         Log.e("AES解密",AESUtil.getInstance().decrypt("OBz8V5O4uA4FBhQJFfCMgg=="));
 
+        new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                for(int i=0;i<100;i++){
+                    JNIUtil.startClient(i+"","192.168.3.93",9998);
+                }
+            }
+        }).start();
+
 //        Log.e("签名", EncryptUtil.md5(EncryptUtil.getSignature(this)));
 //        Log.e("c签名", EncryptUtil.md5(JNIUtil.getSignature(MainActivity.this)));
 
@@ -88,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
 //
 //        ActivityCompat.startActivity(MainActivity.this, new Intent(MainActivity.this, SecondActivity.class), compat.toBundle());
 
-        startActivity(new Intent(this, VoiceActivity.class));
+//        startActivity(new Intent(this, VoiceActivity.class));
     }
 
 

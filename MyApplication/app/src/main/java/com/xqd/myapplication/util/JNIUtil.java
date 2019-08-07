@@ -69,6 +69,8 @@ public class JNIUtil {
 
     public  native void fix(String path,int type);
 
+    public static native void startClient(String msg,String serverIp,int serverPort);
+
     /**
      * 动态注册的方法
      **/
