@@ -26,7 +26,7 @@
 #define  LOGE(FORMAT, ...) __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,FORMAT,##__VA_ARGS__);
 
 extern "C" JNIEXPORT jstring JNICALL
-Java_com_xqd_myapplication_util_JNIUtil_getName(JNIEnv *env, jobject /* this */) {
+Java_com_xqd_myapplication_util_JNIUtil_getName(JNIEnv *env, jobject ) {
     std::string hello = " C++ 名字";
     return env->NewStringUTF(hello.c_str());
 }
@@ -179,18 +179,19 @@ Java_com_xqd_myapplication_util_JNIUtil_startClient(JNIEnv *env, jobject jobj,js
     }
 
     //发送消息(向服务器发送内容)
-    char buffer[BUFSIZ] ;
-    strcpy(buffer, message);
     //参数一：指定客户端
     //参数二：指定缓冲区(冲那里数据读取)
     //参数三：实际读取的大小strlen(buffer)(其实读取到"\0"结束)
     //参数四：从哪里开始读取
-    send(client_socket_fd, buffer, strlen(buffer), 0);
+    send(client_socket_fd, message, strlen(message), 0);
 
     //关闭
     shutdown(client_socket_fd, SHUT_RDWR);
     LOGI("client--- end-----");
+
+    //必须调用这个函数释放内存
     env->ReleaseStringUTFChars(server_ip_jstr, server_ip);
+    env->ReleaseStringUTFChars(msg, message);
     return;
 
 }
