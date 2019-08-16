@@ -35,6 +35,8 @@
         </activity>
         <activity android:name=".ui.ProjectionActivity">
         </activity>
+        <activity android:name=".ui.AnimatorActivity">
+        </activity>
 
         <service
                 android:name=".upnp.ClingUpnpService"
