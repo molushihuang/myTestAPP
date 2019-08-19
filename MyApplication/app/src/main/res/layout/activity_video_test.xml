@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <cn.jzvd.JZVideoPlayerStandard
+            android:id="@+id/video_player"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"/>
+
+    <Button
+            android:text="全屏"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/btn_full"
+            android:layout_width="200dp"
+            android:layout_height="50dp"/>
+</LinearLayout>

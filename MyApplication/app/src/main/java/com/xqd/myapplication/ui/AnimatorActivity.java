@@ -2,9 +2,13 @@ package com.xqd.myapplication.ui;
 
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ImageView;
 import com.xqd.myapplication.R;
 import com.xqd.myapplication.util.DecelerateAccelerateInterpolator;
@@ -29,6 +33,16 @@ public class AnimatorActivity extends AppCompatActivity {
         setSupportActionBar(toolbar); //将toolbar设置为actionbar
 
         pointAnimation();
+
+        ivRing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ActivityOptionsCompat compat = ActivityOptionsCompat.makeCustomAnimation(AnimatorActivity.this,
+                        R.anim.activity_fade_in, R.anim.activity_fade_out);
+//
+                ActivityCompat.startActivity(AnimatorActivity.this, new Intent(AnimatorActivity.this, SecondActivity.class), compat.toBundle());
+            }
+        });
     }
 
     //黄色球的动画
