@@ -99,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
         menu.add(0, 4, 4, "ActivityOptions_test");
         menu.add(0, 5, 5, "Voice_test");
         menu.add(0, 6, 6, "video_test");
+        menu.add(0, 7, 7, "canvas_test");
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -122,6 +123,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case 6:
                 startActivity(new Intent(this, VideoTestActivity.class));
+                break;
+            case 7:
+                startActivity(new Intent(this, CanvasDemoActivity.class));
                 break;
             default:
                 break;
