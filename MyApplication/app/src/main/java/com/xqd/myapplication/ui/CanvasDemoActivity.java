@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Path;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -89,15 +88,31 @@ public class CanvasDemoActivity extends Activity {
 //                    paint);
 
             //画路径
-            Path path = new Path(); //定义一条路径
-            path.moveTo(100, 100); //移动到 坐标10,10
-            path.lineTo(100, 200);
-            path.lineTo(200, 80);
-            path.lineTo(100, 100);
-            canvas.drawPath(path, paint);
-            //画文字路径
-            canvas.drawTextOnPath("东哥是大帅比啊哈哈哈", path, 10, 10, paint);
+//            Path path = new Path(); //定义一条路径
+//            path.moveTo(100, 100); //移动到 坐标10,10
+//            path.lineTo(100, 200);
+//            path.lineTo(200, 80);
+//            path.lineTo(100, 100);
+//            canvas.drawPath(path, paint);
+//            //画文字路径
+//            canvas.drawTextOnPath("东哥是大帅比啊哈哈哈", path, 10, 10, paint);
 
+            //画文字
+            Paint paint = new Paint();
+            paint.setColor(Color.RED);  //设置画笔颜色
+            paint.setStrokeWidth(5);//设置画笔宽度
+            paint.setAntiAlias(true); //指定是否使用抗锯齿功能，如果使用，会使绘图速度变慢
+            paint.setStyle(Paint.Style.FILL);//绘图样式，对于设文字和几何图形都有效
+//            paint.setTextAlign(Paint.Align.LEFT);//设置文字对齐方式，取值：align.CENTER、align.LEFT或align.RIGHT
+            paint.setTextSize(80);//设置文字大小
+            //样式设置
+            paint.setFakeBoldText(true);//设置是否为粗体文字
+            paint.setUnderlineText(true);//设置下划线
+            paint.setTextSkewX((float) -0.25);//设置字体水平倾斜度，普通斜体字是-0.25
+            paint.setStrikeThruText(true);//设置带有删除线效果
+            //其它设置
+//            paint.setTextScaleX(2);//只会将水平方向拉伸，高度不会变
+            canvas.drawText("东爷测试啦", 100, 300, paint);
 
             //按照既定点 绘制文本内容
 //            canvas.drawPosText("东哥是大帅比啊哈哈哈", new float[]{
