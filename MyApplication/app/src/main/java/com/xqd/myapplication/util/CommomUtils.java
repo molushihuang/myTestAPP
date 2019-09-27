@@ -3,6 +3,8 @@ package com.xqd.myapplication.util;
 import android.content.Context;
 import android.provider.Settings;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.Collection;
 import java.util.Formatter;
 import java.util.Locale;
@@ -71,5 +73,22 @@ public class CommomUtils {
     public static boolean enableLocation(Context mContext){
         return  Settings.Secure.getInt(mContext.getContentResolver(),Settings.Secure.ALLOW_MOCK_LOCATION, 0) != 0;
     }
+
+    public static boolean checkSuFile() {
+        Process process = null;
+        try {
+            //   /system/xbin/which 或者  /system/bin/which
+            process = Runtime.getRuntime().exec(new String[]{"which", "su"});
+            BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            if (in.readLine() != null) return true;
+            return false;
+        } catch (Throwable t) {
+            return false;
+        } finally {
+            if (process != null) process.destroy();
+        }
+    }
+
+
 
 }
