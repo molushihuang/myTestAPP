@@ -3,4 +3,5 @@
     <string name="transition_name">doufu</string>
     <string name="transition_name2">hello</string>
     <string name="title_activity_contraint">ContraintActivity</string>
+    <string name="title_activity_auto_complete_text_view">AutoCompleteTextViewActivity</string>
 </resources>

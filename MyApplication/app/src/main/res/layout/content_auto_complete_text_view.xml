@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".ui.AutoCompleteTextViewActivity"
+        tools:showIn="@layout/activity_auto_complete_text_view">
+
+    <AutoCompleteTextView
+            android:layout_marginTop="10dp"
+            android:id="@+id/at_name"
+            android:completionThreshold="1"
+            android:completionHint="请输入搜索内容"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="MissingConstraints" />
+
+</android.support.constraint.ConstraintLayout>

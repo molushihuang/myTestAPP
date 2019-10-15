@@ -107,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
         menu.add(0, 6, 6, "video_test");
         menu.add(0, 7, 7, "canvas_test");
         menu.add(0, 8, 8, "gps_test");
+        menu.add(0, 9, 9, "auto_complete_textView_test");
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -136,6 +137,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case 8:
                 startActivity(new Intent(this, MockGpsProviderActivity.class));
+                break;
+            case 9:
+                startActivity(new Intent(this, AutoCompleteTextViewActivity.class));
                 break;
             default:
                 break;
