@@ -20,12 +20,13 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".ui.AsyncTaskActivity"></activity>
         <activity
                 android:name=".ui.AutoCompleteTextViewActivity"
                 android:label="@string/title_activity_auto_complete_text_view"
-                android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".ui.FfmpegActivity"></activity>
-        <activity android:name=".ui.VoiceActivity"></activity>
+                android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.FfmpegActivity" />
+        <activity android:name=".ui.VoiceActivity" />
         <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,13 +34,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.SecondActivity"></activity>
-        <activity android:name=".ui.ContraintActivity"></activity>
-        <activity android:name=".ui.ProjectionActivity"></activity>
-        <activity android:name=".ui.AnimatorActivity"></activity>
-        <activity android:name=".ui.VideoTestActivity"></activity>
-        <activity android:name=".ui.CanvasDemoActivity"></activity>
-        <activity android:name=".ui.MockGpsProviderActivity"></activity>
+        <activity android:name=".ui.SecondActivity" />
+        <activity android:name=".ui.ContraintActivity" />
+        <activity android:name=".ui.ProjectionActivity" />
+        <activity android:name=".ui.AnimatorActivity" />
+        <activity android:name=".ui.VideoTestActivity" />
+        <activity android:name=".ui.CanvasDemoActivity" />
+        <activity android:name=".ui.MockGpsProviderActivity" />
 
         <service
                 android:name=".upnp.ClingUpnpService"

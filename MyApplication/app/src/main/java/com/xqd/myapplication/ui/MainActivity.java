@@ -108,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
         menu.add(0, 7, 7, "canvas_test");
         menu.add(0, 8, 8, "gps_test");
         menu.add(0, 9, 9, "auto_complete_textView_test");
+        menu.add(0, 10, 10, "asyncTask_test");
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -140,6 +141,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case 9:
                 startActivity(new Intent(this, AutoCompleteTextViewActivity.class));
+                break;
+            case 10:
+                startActivity(new Intent(this, AsyncTaskActivity.class));
                 break;
             default:
                 break;
