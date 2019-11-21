@@ -39,6 +39,7 @@ public class AsyncTaskActivity extends AppCompatActivity {
                 mMyTask.cancel(true);
             }
         });
+
     }
 
 

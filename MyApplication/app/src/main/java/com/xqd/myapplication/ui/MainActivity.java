@@ -85,15 +85,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void toNext() {
-//        new Thread(new Runnable() {
-//
-//            @Override
-//            public void run() {
-//                for(int i=0;i<50;i++){
-//                    JNIUtil.startClient(i+"","192.168.3.93",9998);
-//                }
-//            }
-//        }).start();
+        new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                for(int i=0;i<50;i++){
+                    JNIUtil.startClient(i+"","192.168.3.93",9998);
+                }
+            }
+        }).start();
 
     }
 
