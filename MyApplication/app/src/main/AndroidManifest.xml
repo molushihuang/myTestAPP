@@ -41,6 +41,7 @@
         <activity android:name=".ui.VideoTestActivity" />
         <activity android:name=".ui.CanvasDemoActivity" />
         <activity android:name=".ui.MockGpsProviderActivity" />
+        <activity android:name=".ui.ObservableActivtiy" />
 
         <service
                 android:name=".upnp.ClingUpnpService"

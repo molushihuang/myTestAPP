@@ -95,8 +95,10 @@ public class AsyncTaskActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        if (mMyTask != null)
+        if (mMyTask != null){
             mMyTask.cancel(true);
+        }
+
         super.onDestroy();
     }
 }
