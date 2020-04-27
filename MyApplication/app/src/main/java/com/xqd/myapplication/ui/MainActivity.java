@@ -110,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
         menu.add(0, 9, 9, "auto_complete_textView_test");
         menu.add(0, 10, 10, "asyncTask_test");
         menu.add(0, 11, 11, "observable_test");
+        menu.add(0, 12, 12, "kotlin_test");
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -148,6 +149,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case 11:
                 startActivity(new Intent(this, ObservableActivtiy.class));
+                break;
+            case 12:
+                startActivity(new Intent(this, KotlinTestActivity.class));
                 break;
             default:
                 break;
