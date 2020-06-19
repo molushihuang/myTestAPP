@@ -1,0 +1,18 @@
+ninja: Entering directory `E:\ASworkspace\myTestAPP\MyApplication\app\.cxx\cmake\debug\armeabi-v7a'
+[1/5] Building CXX object CMakeFiles/demo.dir/effects_qq_voicer.cpp.o
+[2/5] Building CXX object CMakeFiles/demo.dir/md5.cpp.o
+E:/ASworkspace/myTestAPP/MyApplication/app/src/main/cpp/md5.cpp:263:18: warning: multi-character character constant [-Wmultichar]
+    while (*s != '/0') {
+                 ^
+E:/ASworkspace/myTestAPP/MyApplication/app/src/main/cpp/md5.cpp:263:15: warning: result of comparison of constant 12080 with expression of type 'char' is always true [-Wtautological-constant-out-of-range-compare]
+    while (*s != '/0') {
+           ~~ ^  ~~~~
+2 warnings generated.
+[3/5] Building CXX object CMakeFiles/demo.dir/JNItest.cpp.o
+E:/ASworkspace/myTestAPP/MyApplication/app/src/main/cpp/JNItest.cpp:75:23: warning: implicit conversion of NULL constant to 'jboolean' (aka 'unsigned char') [-Wnull-conversion]
+    jboolean iscopy = NULL;
+             ~~~~~~   ^~~~
+                      '\0'
+1 warning generated.
+[4/5] Building CXX object CMakeFiles/demo.dir/JNIDynamicRegister.cpp.o
+[5/5] Linking CXX shared library E:\ASworkspace\myTestAPP\MyApplication\app\build\intermediates\cmake\debug\obj\armeabi-v7a\libdemo.so

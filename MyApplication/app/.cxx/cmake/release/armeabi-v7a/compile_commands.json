@@ -1,0 +1,25 @@
+[
+{
+  "directory": "E:/ASworkspace/myTestAPP/MyApplication/app/.cxx/cmake/release/armeabi-v7a",
+  "command": "D:\\androidSdk\\ndk\\21.3.6528147\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=armv7-none-linux-androideabi19 --gcc-toolchain=D:/androidSdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=D:/androidSdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/windows-x86_64/sysroot  -Ddemo_EXPORTS  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security   -Oz -DNDEBUG  -fPIC   -o CMakeFiles\\demo.dir\\effects_qq_voicer.cpp.o -c E:\\ASworkspace\\myTestAPP\\MyApplication\\app\\src\\main\\cpp\\effects_qq_voicer.cpp",
+  "file": "E:\\ASworkspace\\myTestAPP\\MyApplication\\app\\src\\main\\cpp\\effects_qq_voicer.cpp"
+},
+
+{
+  "directory": "E:/ASworkspace/myTestAPP/MyApplication/app/.cxx/cmake/release/armeabi-v7a",
+  "command": "D:\\androidSdk\\ndk\\21.3.6528147\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=armv7-none-linux-androideabi19 --gcc-toolchain=D:/androidSdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=D:/androidSdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/windows-x86_64/sysroot  -Ddemo_EXPORTS  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security   -Oz -DNDEBUG  -fPIC   -o CMakeFiles\\demo.dir\\JNItest.cpp.o -c E:\\ASworkspace\\myTestAPP\\MyApplication\\app\\src\\main\\cpp\\JNItest.cpp",
+  "file": "E:\\ASworkspace\\myTestAPP\\MyApplication\\app\\src\\main\\cpp\\JNItest.cpp"
+},
+
+{
+  "directory": "E:/ASworkspace/myTestAPP/MyApplication/app/.cxx/cmake/release/armeabi-v7a",
+  "command": "D:\\androidSdk\\ndk\\21.3.6528147\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=armv7-none-linux-androideabi19 --gcc-toolchain=D:/androidSdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=D:/androidSdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/windows-x86_64/sysroot  -Ddemo_EXPORTS  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security   -Oz -DNDEBUG  -fPIC   -o CMakeFiles\\demo.dir\\md5.cpp.o -c E:\\ASworkspace\\myTestAPP\\MyApplication\\app\\src\\main\\cpp\\md5.cpp",
+  "file": "E:\\ASworkspace\\myTestAPP\\MyApplication\\app\\src\\main\\cpp\\md5.cpp"
+},
+
+{
+  "directory": "E:/ASworkspace/myTestAPP/MyApplication/app/.cxx/cmake/release/armeabi-v7a",
+  "command": "D:\\androidSdk\\ndk\\21.3.6528147\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=armv7-none-linux-androideabi19 --gcc-toolchain=D:/androidSdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=D:/androidSdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/windows-x86_64/sysroot  -Ddemo_EXPORTS  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security   -Oz -DNDEBUG  -fPIC   -o CMakeFiles\\demo.dir\\JNIDynamicRegister.cpp.o -c E:\\ASworkspace\\myTestAPP\\MyApplication\\app\\src\\main\\cpp\\JNIDynamicRegister.cpp",
+  "file": "E:\\ASworkspace\\myTestAPP\\MyApplication\\app\\src\\main\\cpp\\JNIDynamicRegister.cpp"
+}
+]

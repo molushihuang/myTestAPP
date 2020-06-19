@@ -1,0 +1,6 @@
+# ninja log v5
+0	364	614256353	CMakeFiles/demo.dir/effects_qq_voicer.cpp.o	53319a9fe9d6d990
+111	711	614256353	CMakeFiles/demo.dir/md5.cpp.o	d55b0109a8b6a23b
+40	858	614256353	CMakeFiles/demo.dir/JNItest.cpp.o	43609761f3847e49
+171	976	614256354	CMakeFiles/demo.dir/JNIDynamicRegister.cpp.o	8f58f46f22a54dd3
+976	1099	614256354	E:/ASworkspace/myTestAPP/MyApplication/app/build/intermediates/cmake/debug/obj/armeabi-v7a/libdemo.so	c292c56f57d5f7fb
