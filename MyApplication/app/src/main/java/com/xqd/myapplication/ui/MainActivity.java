@@ -10,6 +10,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,9 +18,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.xqd.myapplication.R;
-import com.xqd.myapplication.util.AESUtil;
-import com.xqd.myapplication.util.EncryptUtil;
 import com.xqd.myapplication.util.JNIUtil;
+import com.xqd.myapplication.util.RSAUtil;
+
+import java.security.KeyPair;
 
 public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
@@ -73,9 +75,25 @@ public class MainActivity extends AppCompatActivity {
         for (int i : array) {
             Log.e("数组排序", i + "");
         }
-        Log.e("base64", EncryptUtil.getBase64Encode("BaiduMapSDK_map_for_bikenavi_v5_4_0"));
-        Log.e("AES加密", AESUtil.getInstance().encrypt("草泥马"));
-        Log.e("AES解密", AESUtil.getInstance().decrypt("OBz8V5O4uA4FBhQJFfCMgg=="));
+//        Log.e("base64", EncryptUtil.getBase64Encode("BaiduMapSDK_map_for_bikenavi_v5_4_0"));
+//        Log.e("AES加密", AESUtil.getInstance().encrypt("草泥马"));
+//        Log.e("AES解密", AESUtil.getInstance().decrypt("OBz8V5O4uA4FBhQJFfCMgg=="));
+
+        KeyPair keyPair = RSAUtil.generateRSAKeyPair(513);
+        Log.e("私钥》", Base64.encodeToString(keyPair.getPrivate().getEncoded(), Base64.NO_WRAP));
+        Log.e("公钥》", Base64.encodeToString(keyPair.getPublic().getEncoded(), Base64.NO_WRAP));
+
+        String str = "谢邱东";
+        String publicKey = "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAdYiCc44lCYNSSSxSMSJU1IJldtCDw0Mnxfp9kbazZTAEy8hJzluKLhVqJ95U20YgtN8eSovfTqMZ+69HzTBRDcCAwEAAQ==";
+        String privateKey = "MIIBVQIBADANBgkqhkiG9w0BAQEFAASCAT8wggE7AgEAAkEB1iIJzjiUJg1JJLFIxIlTUgmV20IPDQyfF+n2RtrNlMATLyEnOW4ouFWon3lTbRiC03x5Ki99Ooxn7r0fNMFENwIDAQABAkBiFX3oOWOnQLRW5GnjHyd0AS3zraeIOG7kxVotVC757jGr97A2nxxo7TJFZzEcAyguZUnuSuM6y9eQTlYGE+VpAiEB+Z17B/+I8pqVknJEvXlabHPYgD7/jQL5I3p+nkmAYYUCIQDuCO01voEnqUzq5XzPQm4xTkG5+s5AIgYR/iQiqNNdiwIhAYlLCEKGcN5VhHcvz2ybEs09p3DKkDn90BHa3Nb/UY+JAiB6dmM71D/0XLiy3NBCfUXd3goYmb1E53xCA4MpxbvAkwIhAfCkosj/G3or+Fh+MsQ1pEPbaCo8ELYFrfh6rUCXEaWB";
+        try {
+            byte[] data = RSAUtil.encryptByPublicKey(str.getBytes(), Base64.decode(publicKey, Base64.NO_WRAP));
+            String strData = Base64.encodeToString(data, Base64.NO_WRAP);
+            Log.e("公钥加密》", Base64.encodeToString(data, Base64.NO_WRAP));
+            Log.e("私钥解密》", new String(RSAUtil.decryptByPrivateKey(Base64.decode(strData, Base64.NO_WRAP), Base64.decode(privateKey, Base64.NO_WRAP))));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 //        tvHello.setText(CommomUtils.checkRootFile().getAbsolutePath());
 
@@ -89,8 +107,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void run() {
-                for(int i=0;i<50;i++){
-                    JNIUtil.startClient(i+"","192.168.3.93",9998);
+                for (int i = 0; i < 50; i++) {
+                    JNIUtil.startClient(i + "", "192.168.4.70", 2580);
                 }
             }
         }).start();
